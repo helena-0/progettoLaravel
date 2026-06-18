@@ -1,0 +1,42 @@
+#corpo{
+    display: flex;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+#dati{
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    font-size: 12px;
+    width: 220px;
+}
+
+#dati div{
+    font-weight: 550;
+    padding: 5px;
+}
+
+#dati a{
+    padding: 5px;
+}
+
+#dati a:hover{
+    font-weight: 550;
+}
+
+#corpo_dx{
+    display: flex;
+    flex-grow:1;
+    flex-direction: column;
+
+    margin-top: -30px;
+}
+
+@media(max-width: 768px){
+
+    #corpo{
+        flex-direction: column;
+    }
+}

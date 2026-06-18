@@ -2,7 +2,9 @@
 <html>
     <head>
         <title>Feltrinelli: Libri, DVD, Blue-Ray, CD, eBook, Games, eReader, Giocattoli</title>
-        <link rel="stylesheet" href="{{ url('css/style.css') }}" />
+        <link rel="stylesheet" href="{{ url('css/app.css') }}" />
+        @yield('styles')
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">

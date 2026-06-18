@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ url('css/home.css') }}">
+@endsection
+
 @section('scripts')
     <script>
         const SEARCH_URL = "{{ url('api/search') }}";
