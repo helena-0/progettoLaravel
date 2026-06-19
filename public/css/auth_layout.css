@@ -1,0 +1,100 @@
+body{
+    margin: 0;
+    display: flex;
+    font-family: "Montserrat";
+}
+
+#body_sx{
+    width: 50%;
+    height: 100vh;
+    background-image: url('../immagini/registration-visual.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#body_sx img{
+    width: 100%
+}
+
+#body_dx{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 50%;
+}
+
+#indietro{
+    display: flex;
+    width: 200px;
+    height: 30px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#indietro img{
+    width: 30px
+}
+
+#reg{
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    color: #e30613; 
+}
+
+input{
+    width: 100%;
+    height: 40px;
+    outline: none;
+}
+
+#submit{
+    cursor: pointer;
+    background-color: #263238;
+    color: white;
+}
+
+#submit:hover{
+    color: #263238;
+    background-color: white;
+}
+
+.errore input {
+    border-color: #e30613;
+}
+
+#body_up{
+    display: none;
+    color: #e30613;
+    height: 20px;
+}
+
+@media(max-width: 1024px){
+
+    body{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #body_sx{
+        display: none;
+    }
+
+    #body_up{
+        display: inline;
+    }
+
+}

@@ -1,0 +1,53 @@
+
+
+#accesso{
+    width: 400px;
+}
+
+#accesso div{
+    display: flex;
+    flex-direction: column;
+    padding-bottom:23px;
+    position: relative;
+}
+
+#accesso span{
+    display: none;
+    font-size: 10px;
+    bottom: 11px;
+    left: 0;
+    position: absolute;
+}
+
+#accesso .errore span {
+    display: block;
+    color: #e30613;
+}
+
+#accesso #bottone-reg{
+    padding-bottom: 0px;
+}
+
+#registrazione{
+    display: flex;
+    padding-top: 20px;
+    font-size: 14px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#registrazione a{
+    padding-left: 2px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.errore-login {
+    display: block;
+    color: #e30613;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}

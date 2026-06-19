@@ -1,0 +1,42 @@
+
+#registrazione{
+    width: 400px;
+}
+
+#registrazione div{
+    display: flex;
+    flex-direction: column;
+    padding-bottom:23px;
+    position: relative;
+}
+
+#registrazione span{
+    display: none;
+    font-size: 10px;
+    bottom: 11px;
+    left: 0;
+    position: absolute;
+}
+
+#registrazione .errore span {
+    display: block;
+    color: #e30613;
+}
+
+#registrazione #div-ricorda{
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+#div-ricorda input{
+    width: 18px;                 
+    height: 18px;                
+    cursor: pointer;
+}
+
+#registrazione #bottone-reg{
+    padding-bottom: 0px;
+}
