@@ -2,14 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $auth = Session::has('user_id');
-        return view('home', ['auth' => $auth]);
+    public function index(){
+        return view('home');
+    }
+
+    public function account(){
+        if (!Session::has('user_id')) {
+            return redirect('login');
+        }
+
+        $user = User::find(Session::get('user_id'));
+        return view('account', ['user' => $user]);
+    }
+
+    public function carrello(){
+        if (!Session::has('user_id')) {
+            return redirect('login');
+        }
+
+        return view('carrello');
     }
 }

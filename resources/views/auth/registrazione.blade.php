@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="{{ url('css/registrazione.css') }}">
 @endsection
 
+@section('scripts')
+    <script>
+        const CHECK_EMAIL_URL = "{{ url('check_email') }}";
+    </script>
+    <script src="{{ url('js/registrazione.js') }}" defer></script>
+@endsection
+
 @section('auth_content')
     <h1>Crea un account</h1>
     

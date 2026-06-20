@@ -50,7 +50,7 @@
 
                 <div class="icone">
                     <img src="{{ url('immagini/favorite.png') }}" class="logo" id="preferiti">
-                    @if(!$auth)
+                    @if(!session()->has('user_id'))
                         <img src="{{ url('immagini/cart.png') }}" class="logo" >
                         <a href="{{ url('login') }}">
                             <img src="{{ url('immagini/person.png') }}" class="logo" id="loggin">

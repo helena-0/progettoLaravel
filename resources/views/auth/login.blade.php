@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ url('css/login.css') }}">
 @endsection
 
+@section('scripts')
+    <script src="{{ url('js/login.js') }}" defer></script>
+@endsection
+
 @section('auth_content')
     <h1>Accedi</h1>
     

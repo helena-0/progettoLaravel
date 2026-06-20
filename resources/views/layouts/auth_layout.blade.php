@@ -5,6 +5,8 @@
     
     <link rel="stylesheet" href="{{ url('css/auth_layout.css') }}" />
     @yield('styles')
+
+    @yield('scripts')
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">

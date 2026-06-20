@@ -166,7 +166,7 @@ function coloraCuoriNellaPagina(preferitiJson) {
 function inizializzaHome() {
     const contenitoreHome = document.querySelector("#sezione-libri-dinamici");
     if (contenitoreHome) {
-        fetch("api_libri.php").then(onResponse).then(onJsonCaricaCatalogo);
+        fetch(API_LIBRI_URL).then(onResponse).then(onJsonCaricaCatalogo);
     }
 }
 
@@ -484,7 +484,7 @@ function search(event) {
         return; 
     }
 
-    const rest_url = "api_openlibrary.php?q=" + author_value;
+    const rest_url = API_OPENLIBRARY_URL + "?q="+ author_value;
     fetch(rest_url).then(onResponse).then(onJson);
 }
 
@@ -535,7 +535,7 @@ function onJsonRanking(json) {
 
 function aggiornaClassificaFilm() {
     
-    fetch("api_film.php").then(onResponse).then(onJsonRanking);
+    fetch(API_FILM_URL).then(onResponse).then(onJsonRanking);
 }
 aggiornaClassificaFilm();
 
@@ -584,7 +584,7 @@ function cercaFilmTramiteForm(event) {
         return;
     }
 
-    const url = "api_film.php?q=" + testoCercato;
+    const url = API_FILM_URL+ "?q=" + testoCercato;
     fetch(url).then(onResponse).then(onJsonRicerca);
 }
 
