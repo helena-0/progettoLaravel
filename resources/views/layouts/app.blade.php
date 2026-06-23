@@ -9,6 +9,17 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
+        <script>
+            const BASE_URL = "{{ url('/') }}";
+            
+            const API_OPENLIBRARY_URL = "{{ url('api/openlibrary') }}";
+            const API_LEGGI_PREFERITI = "{{ url('api/preferiti/leggi') }}";
+            const API_AGGIUNGI_PREFERITO = "{{ url('api/preferiti/aggiungi') }}";           
+            const API_LEGGI_CARRELLO = "{{ url('api/carrello/leggi') }}";
+            const API_AGGIUNGI_CARRELLO = "{{ url('api/carrello/aggiungi') }}";
+
+            const CSRF_TOKEN = "{{ csrf_token() }}";
+        </script>
         @yield('scripts')
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +44,11 @@
             </div>
 
             <div class="barra-superiore"> 
-                <div><img src="{{ url('immagini/logo.png') }}" class="logo"></div>
+                <div>
+                    <a href="{{ url('home') }}">
+                        <img src="{{ url('immagini/logo.png') }}" class="logo">
+                    </a>
+                </div>
 
                 <form id="ricerca">        
                     <div class="barra-ricerca">

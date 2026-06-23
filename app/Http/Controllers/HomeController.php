@@ -13,7 +13,7 @@ class HomeController extends Controller
     }
 
     public function account(){
-        if (!Session::has('user_id')) {
+        if (!Session::has('user_id')){
             return redirect('login');
         }
 
@@ -22,10 +22,27 @@ class HomeController extends Controller
     }
 
     public function carrello(){
-        if (!Session::has('user_id')) {
+        if (!Session::has('user_id')){
             return redirect('login');
         }
 
         return view('carrello');
+    }
+
+    public function eliminaAccount()
+    {
+        if (!Session::has('user_id')){
+            return response()->json(['success' => false, 'error' => 'Non autorizzato']);
+        }
+
+        $user = User::find(Session::get('user_id'));
+
+        if ($user){
+            $user->delete(); 
+            Session::flush(); 
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'error' => 'Utente non trovato']);
     }
 }

@@ -32,7 +32,9 @@ function rimuoviDalCarrello(event) {
     const dati_carrello = new FormData();
     dati_carrello.append("id_libro", idLibro);
 
-    fetch("api_aggiungi_carrello.php", { method: "post", body: dati_carrello })
+    dati_carrello.append("_token", CSRF_TOKEN);
+
+    fetch(API_AGGIUNGI_CARRELLO, { method: "post", body: dati_carrello })
         .then(onResponse).then(function(json) {
         if(json.success) {
             const divContenitoreDescrizione = bottone.parentNode;
@@ -118,7 +120,7 @@ function caricaCarrelloAsincrono() {
     const contenitore = document.querySelector("#carrello");
  
     if (contenitore) {
-        fetch("api_leggi_carrello.php").then(onResponse).then(onJsonLeggiCarrello);
+        fetch(API_LEGGI_CARRELLO).then(onResponse).then(onJsonLeggiCarrello);
     }
 }
 
@@ -167,10 +169,13 @@ function BottoneRosso(event) {
         datiDaSpedire.append("prezzo_sconto", bottone.dataset.prezzoSconto || "");
     }
 
-    const opzioni = { method: "post", body: datiDaSpedire };
+    datiDaSpedire.append("_token", CSRF_TOKEN);
+    const opzioni = { 
+        method: "post", 
+        body: datiDaSpedire 
+    };
 
-    fetch("api_aggiungi_preferito.php", opzioni).then(onResponse).then(function(json) {
-        if (!json) return;
+    fetch(API_AGGIUNGI_PREFERITO, opzioni).then(onResponse).then(function(json) {
         caricaPreferitiDalDB();
     });
 }
@@ -179,7 +184,7 @@ function caricaPreferitiDalDB() {
     const flexPreferiti = document.querySelector("#sezionej");
     if (!flexPreferiti) return;
 
-    fetch("api_leggi_preferiti.php").then(onResponse).then(function(json) {
+    fetch(API_LEGGI_PREFERITI).then(onResponse).then(function(json) {
         if (!json) return;
         flexPreferiti.innerHTML = ""; 
 
@@ -277,8 +282,9 @@ function aggiungiAlCarrello(event) {
         dati_carrello.append("prezzo_sconto", bottone.dataset.prezzoSconto);
     }
 
+    dati_carrello.append("_token", CSRF_TOKEN);
     const opzioni = { method: "post", body: dati_carrello };
-    fetch("api_aggiungi_carrello.php", opzioni).then(onResponse).then(onJsonCarrello);
+    fetch(API_AGGIUNGI_CARRELLO, opzioni).then(onResponse).then(onJsonCarrello);
 }
 
 function onJson(json) {
@@ -368,7 +374,7 @@ function onJson(json) {
         library.appendChild(book);
     }
 
-    fetch("api_leggi_carrello.php").then(onResponse).then(function(carrelloJson) {
+    fetch(API_LEGGI_CARRELLO).then(onResponse).then(function(carrelloJson) {
         if (!carrelloJson) return;
         const bottoniRicerca = document.querySelectorAll("#sezione-ricerca .destra-ricerca");
         for (let b = 0; b < bottoniRicerca.length; b++) {
@@ -397,7 +403,7 @@ function search(event) {
         return; 
     }
 
-    const rest_url = "api_openlibrary.php?q=" + author_value;
+    const rest_url = API_OPENLIBRARY_URL + "?q=" + author_value;
     fetch(rest_url).then(onResponse).then(onJson);
 }
 

@@ -5,6 +5,9 @@
 @endsection
 
 @section('page_scripts')
+    <script>
+        const API_ELIMINA_ACCOUNT_URL = "{{ url('api/elimina_account') }}";
+    </script>
     <script src="{{ url('js/account.js') }}" defer></script>
 @endsection
 
@@ -83,4 +86,16 @@
             <button id="bottone_elimina">Procedi</button>
         </div>
     </section>
+    <section id="modal-view" class="hidden">
+        <section id="boxElimina">
+            <span>
+                Sei sicuro di voler eliminare l'account?
+            </span>
+            <div>
+                <button id="bottone_conferma">Elimina</button>
+                <a href="#">Annulla</a>
+            </div>
+        </section>
+    </section>
 @endsection
+

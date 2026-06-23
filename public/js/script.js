@@ -74,12 +74,13 @@ function BottoneRosso(event) {
         datiDaSpedire.append("prezzo_sconto", bottone.dataset.prezzoSconto || "");
     }
 
+    datiDaSpedire.append("_token", CSRF_TOKEN);
     const opzioni = { 
         method: "post", 
         body: datiDaSpedire 
     };
 
-    fetch("api_aggiungi_preferito.php", opzioni).then(onResponse).then(function(json) {
+    fetch(API_AGGIUNGI_PREFERITO, opzioni).then(onResponse).then(function(json) {
         caricaPreferitiDalDB();
     });
 }
@@ -88,7 +89,7 @@ function caricaPreferitiDalDB() {
     const flexPreferiti = document.querySelector("#sezionej");
     if (!flexPreferiti) return;
 
-    fetch("api_leggi_preferiti.php").then(onResponse).then(function(json) {
+    fetch(API_LEGGI_PREFERITI).then(onResponse).then(function(json) {
         flexPreferiti.innerHTML = ""; 
 
         for (let i = 0; i < json.length; i++) {
@@ -286,7 +287,7 @@ function onJsonCaricaCatalogo(json) {
 // ------------------------------------------------------------------------------------------
 
 function ripristinaStatoCarrelloHome() {
-    fetch("api_leggi_carrello.php").then(onResponse).then(function(json) {
+    fetch(API_LEGGI_CARRELLO).then(onResponse).then(function(json) {
         for (let i = 0; i < json.length; i++) {
             const idLibroSalvato = json[i].libro_id;
             const bottone = document.querySelector(".pulsante-freccia.destra[data-id-libro='" + idLibroSalvato + "']");
@@ -325,8 +326,9 @@ function aggiungiAlCarrello(event) {
         dati_carrello.append("prezzo_sconto", bottone.dataset.prezzoSconto);
     }
 
+    dati_carrello.append("_token", CSRF_TOKEN);
     const opzioni = { method: "post", body: dati_carrello };
-    fetch("api_aggiungi_carrello.php", opzioni).then(onResponse).then(onJsonCarrello);
+    fetch(API_AGGIUNGI_CARRELLO, opzioni).then(onResponse).then(onJsonCarrello);
 }
 
 inizializzaHome();
@@ -455,7 +457,7 @@ function onJson(json) {
     }
 
     if (utenteLoggato) {
-        fetch("api_leggi_carrello.php").then(onResponse).then(function(carrelloJson) {
+        fetch(API_LEGGI_CARRELLO).then(onResponse).then(function(carrelloJson) {
                 const bottoniRicerca = document.querySelectorAll("#sezione-ricerca .destra-ricerca");
                 for (let b = 0; b < bottoniRicerca.length; b++) {
                     const btn = bottoniRicerca[b];

@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
-class RegisterController extends Controller
-{
+class RegisterController extends Controller{
+    
     public function index(){
         return view('auth.registrazione');
     }
@@ -16,34 +16,33 @@ class RegisterController extends Controller
     public function register(Request $request){
         $errori = [];
         
-        if (!isset($request->nome) || strlen($request->nome) == 0){ 
+        if(!isset($request->nome) || strlen($request->nome) == 0){ 
             $errori['nome'] = 'Inserisci nome';
         }
         
-        if (!isset($request->cognome) || strlen($request->cognome) == 0){ 
+        if(!isset($request->cognome) || strlen($request->cognome) == 0){ 
             $errori['cognome'] = 'Inserisci cognome';
         }
         
-        if (!isset($request->email) || !filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+        if(!isset($request->email) || !filter_var($request->email, FILTER_VALIDATE_EMAIL)){
             $errori['email'] = 'Indirizzo e-mail non valido';
         } 
         else {
             $user = User::where('email', $request->email)->first();
-            if ($user !== null) {
+            if($user !== null){
                 $errori['email'] = 'Email già utilizzata';
             }
         }
         
-        if (!isset($request->password) || strlen($request->password) < 8){
+        if(!isset($request->password) || strlen($request->password) < 8){
             $errori['password'] = 'Inserisci almeno 8 caratteri';
         }
         
-        if (!isset($request->password_confirmation) || $request->password !== $request->password_confirmation){
+        if(!isset($request->password_confirmation) || $request->password !== $request->password_confirmation){
             $errori['password_confirmation'] = 'Le password non coincidono';
         }
         
-        if (count($errori) > 0)
-        {
+        if(count($errori) > 0){
             return redirect('register')
                 ->withInput()
                 ->withErrors($errori);
@@ -61,9 +60,8 @@ class RegisterController extends Controller
         return redirect('home');
     }
 
-    public function checkEmail(Request $request)
-    {
-        if (!$request->has('q')) {
+    public function checkEmail(Request $request){
+        if(!$request->has('q')){
             return response()->json(['exists' => false]);
         }
 

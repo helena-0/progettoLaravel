@@ -10,7 +10,6 @@
         const CARRELLO_URL = "{{ url('api/carrello') }}";
         const API_LIBRI_URL = "{{ url('api/libri') }}";
         const API_FILM_URL = "{{ url('api/film') }}";
-        const API_OPENLIBRARY_URL = "{{ url('api/openlibrary') }}";
     </script>
     <script src="{{ url('js/script.js') }}" defer></script>
 @endsection
