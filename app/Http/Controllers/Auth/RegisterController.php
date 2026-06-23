@@ -27,7 +27,7 @@ class RegisterController extends Controller{
         if(!isset($request->email) || !filter_var($request->email, FILTER_VALIDATE_EMAIL)){
             $errori['email'] = 'Indirizzo e-mail non valido';
         } 
-        else {
+        else{
             $user = User::where('email', $request->email)->first();
             if($user !== null){
                 $errori['email'] = 'Email già utilizzata';

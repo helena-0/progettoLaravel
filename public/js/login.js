@@ -1,36 +1,40 @@
 
 const formStatus = {};
 
-function checkEmail() {
+function checkEmail(){
     const emailInput = document.querySelector("#email");
     
     formStatus.email = emailInput.value.length > 0;
     
-    if (formStatus.email) {
+    if(formStatus.email){
         document.querySelector("#div-email").classList.remove("errore");
-    } else {
+    }
+    else{
+        document.querySelector("#div-email span").textContent = "Inserisci l'e-mail";
         document.querySelector("#div-email").classList.add("errore");
     }
 }
 
-function checkPassword() {
+function checkPassword(){
     const passwordInput = document.querySelector("#password");
     
     formStatus.password = passwordInput.value.length > 0;
     
-    if (formStatus.password) {
+    if(formStatus.password){
         document.querySelector("#div-password").classList.remove("errore");
-    } else {
+    } 
+    else{
+        document.querySelector("#div-password span").textContent = "Inserisci la password";
         document.querySelector("#div-password").classList.add("errore");
     }
 }
 
-function checkLogin(event) {
+function checkLogin(event){
 
     checkEmail();
     checkPassword();
 
-    if (!formStatus.email || !formStatus.password) {
+    if (!formStatus.email || !formStatus.password){
         event.preventDefault();
     }
 }

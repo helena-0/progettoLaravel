@@ -7,6 +7,7 @@ function CheckNome(event){
         input.parentNode.classList.remove("errore");
     }
     else{
+        document.querySelector("#div-nome span").textContent = "Devi inserire il tuo nome";
         input.parentNode.classList.add("errore");
     }
 }
@@ -18,6 +19,7 @@ function CheckCognome(event){
         input.parentNode.classList.remove("errore");
     }
     else{
+        document.querySelector("#div-cognome span").textContent = "Devi inserire il tuo cognome";
         input.parentNode.classList.add("errore");
     }
 }
@@ -54,6 +56,7 @@ function checkPassword(event) {
     if (formStatus.password) {
         document.querySelector("#div-password").classList.remove("errore");
     } else {
+        document.querySelector("#div-password span").textContent = "Inserisci almeno 8 caratteri";
         document.querySelector("#div-password").classList.add("errore");
     }
 }
