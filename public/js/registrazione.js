@@ -1,26 +1,26 @@
 const formStatus = {};
 
 function CheckNome(event){
-    const input=event.currentTarget;
+    const input=document.querySelector("#nome");
     formStatus.nome = input.value.length > 0;
     if(formStatus.nome){
-        input.parentNode.classList.remove("errore");
+        document.querySelector("#div-nome").classList.remove("errore");
     }
     else{
         document.querySelector("#div-nome span").textContent = "Devi inserire il tuo nome";
-        input.parentNode.classList.add("errore");
+        document.querySelector("#div-nome").classList.add("errore");
     }
 }
 
 function CheckCognome(event){
-    const input=event.currentTarget;
+    const input=document.querySelector("#cognome");
     formStatus.cognome = input.value.length > 0;
     if(formStatus.cognome){
-        input.parentNode.classList.remove("errore");
+        document.querySelector("#div-cognome").classList.remove("errore");
     }
     else{
         document.querySelector("#div-cognome span").textContent = "Devi inserire il tuo cognome";
-        input.parentNode.classList.add("errore");
+        document.querySelector("#div-cognome").classList.add("errore");
     }
 }
 

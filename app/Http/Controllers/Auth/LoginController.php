@@ -17,11 +17,11 @@ class LoginController extends Controller
         $errori = [];
         
         if (!isset($request->email) || !filter_var($request->email, FILTER_VALIDATE_EMAIL)){
-            $errori['email'] = 'Inserisci un indirizzo email valido';
+            $errori['email'] = 'Inserisci l\'e-mail';
         }
         
         if (!isset($request->password) || strlen($request->password) < 8){
-            $errori['password'] = 'Inserisci password';
+            $errori['password'] = 'Inserisci la password';
         }
         
         if (count($errori) > 0){
@@ -31,7 +31,6 @@ class LoginController extends Controller
         }
         
         $user = User::where('email', $request->email)->first();
-        
         if (!$user || !password_verify($request->password, $user->password)){
             return redirect('login')
                 ->withInput()

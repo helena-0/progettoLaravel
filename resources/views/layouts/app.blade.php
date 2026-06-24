@@ -20,6 +20,7 @@
 
             const CSRF_TOKEN = "{{ csrf_token() }}";
         </script>
+        <script src="{{ url('js/app.js') }}" defer></script>
         @yield('scripts')
 
         <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -17,15 +17,15 @@ class RegisterController extends Controller{
         $errori = [];
         
         if(!isset($request->nome) || strlen($request->nome) == 0){ 
-            $errori['nome'] = 'Inserisci nome';
+            $errori['nome'] = 'Devi inserire il tuo nome';
         }
         
         if(!isset($request->cognome) || strlen($request->cognome) == 0){ 
-            $errori['cognome'] = 'Inserisci cognome';
+            $errori['cognome'] = 'Devi inserire il tuo cognome';
         }
         
         if(!isset($request->email) || !filter_var($request->email, FILTER_VALIDATE_EMAIL)){
-            $errori['email'] = 'Indirizzo e-mail non valido';
+            $errori['email'] = 'Email non valida';
         } 
         else{
             $user = User::where('email', $request->email)->first();

@@ -3,7 +3,6 @@ const formStatus = {};
 
 function checkEmail(){
     const emailInput = document.querySelector("#email");
-    
     formStatus.email = emailInput.value.length > 0;
     
     if(formStatus.email){
@@ -17,7 +16,6 @@ function checkEmail(){
 
 function checkPassword(){
     const passwordInput = document.querySelector("#password");
-    
     formStatus.password = passwordInput.value.length > 0;
     
     if(formStatus.password){
@@ -34,7 +32,7 @@ function checkLogin(event){
     checkEmail();
     checkPassword();
 
-    if (!formStatus.email || !formStatus.password){
+    if(!formStatus.email || !formStatus.password){
         event.preventDefault();
     }
 }
