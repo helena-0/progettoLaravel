@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
     public function index(){
-        return view('auth.login');
+        $email_salvata = Cookie::get('email_salvata');
+        return view('auth.login', ['email_salvata' => $email_salvata]);
     }
 
     public function checkLogin(Request $request){
@@ -38,6 +40,7 @@ class LoginController extends Controller
         }
     
         Session(['user_id' => $user->id]);
+        Cookie::queue('email_salvata', $request->email, 10080);
 
         return redirect('home');
     }

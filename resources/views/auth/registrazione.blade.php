@@ -43,17 +43,17 @@
             <span>@error('password') {{ $message }} @enderror</span>
         </div>
         
-        <div id="div-conferma_password" class="@error('password_confirmation') errore @enderror">
+        <div id="div-conferma_password" class="@error('conferma_password') errore @enderror">
             <label for="conferma_password">Conferma Password</label>
-            <input type='password' name='password_confirmation' id="conferma_password">
-            <span>@error('password_confirmation') {{ $message }} @enderror</span>
+            <input type='password' name='conferma_password' id="conferma_password">
+            <span>@error('conferma_password') {{ $message }} @enderror</span>
         </div>
 
-        <div id="div-ricorda" class="@error('allow') errore @enderror">
+        <div id="div-ricorda" class="@error('ricordami') errore @enderror">
             <label for="reg_ricordami">Ricordami</label>
-            <input type='checkbox' name='allow' id="reg_ricordami" value="1" @if(old('allow')) checked @endif>
+            <input type='checkbox' name='ricordami' id="reg_ricordami" value="1" @if(old('ricordami')) checked @endif>
             
-            <span>@error('allow') {{ $message }} @enderror</span>
+            <span>@error('ricordami') {{ $message }} @enderror</span>
         </div>
 
         <div id="bottone-reg">

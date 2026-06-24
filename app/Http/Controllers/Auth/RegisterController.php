@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 class RegisterController extends Controller{
     
@@ -38,8 +39,8 @@ class RegisterController extends Controller{
             $errori['password'] = 'Inserisci almeno 8 caratteri';
         }
         
-        if(!isset($request->password_confirmation) || $request->password !== $request->password_confirmation){
-            $errori['password_confirmation'] = 'Le password non coincidono';
+        if(!isset($request->conferma_password) || $request->password !== $request->conferma_password){
+            $errori['conferma_password'] = 'Le password non coincidono';
         }
         
         if(count($errori) > 0){
@@ -56,6 +57,10 @@ class RegisterController extends Controller{
         $user->save();
 
         Session(['user_id' => $user->id]);
+
+        if($request->has('ricordami')){
+            Cookie::queue('email_salvata', $request->email, 10080);
+        }
         
         return redirect('home');
     }
