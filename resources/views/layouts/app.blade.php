@@ -220,12 +220,26 @@
             <div id="barra-superiore1024">
                 <div class="icone">
                     <img src="{{ url('immagini/menu.png') }}" class="logo">
-                    <img src="{{ url('immagini/person.png') }}" class="logo">
+                    @if(!session()->has('user_id'))
+                        <a href="{{ url('login') }}">
+                            <img src="{{ url('immagini/person.png') }}" class="logo">
+                        </a>
+                    @else
+                        <a href="{{ url('account') }}">
+                            <img src="{{ url('immagini/person_log.png') }}" class="logo">
+                        </a>
+                    @endif
                 </div>
                 <img src="{{ url('immagini/logo.png') }}" class="logo">
                 <div class="icone">
                     <img src="{{ url('immagini/favorite.png') }}" class="logo">
-                    <img src="{{ url('immagini/cart.png') }}" class="logo">
+                    @if(!session()->has('user_id'))
+                        <img src="{{ url('immagini/cart.png') }}" class="logo">
+                    @else
+                        <a href="{{ url('carrello') }}">
+                            <img src="{{ url('immagini/cart.png') }}" class="logo" >
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="barra-ricerca barra-ricerca1024">
