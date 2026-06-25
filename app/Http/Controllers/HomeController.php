@@ -6,8 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller{
     public function index(){
         return view('home');
     }
@@ -29,8 +28,7 @@ class HomeController extends Controller
         return view('carrello');
     }
 
-    public function eliminaAccount()
-    {
+    public function eliminaAccount(){
         if (!Session::has('user_id')){
             return response()->json(['success' => false, 'error' => 'Non autorizzato']);
         }

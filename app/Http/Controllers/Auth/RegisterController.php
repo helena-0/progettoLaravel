@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cookie;
 
 class RegisterController extends Controller{
     
@@ -58,8 +57,8 @@ class RegisterController extends Controller{
 
         Session(['user_id' => $user->id]);
 
-        if($request->has('ricordami')){
-            Cookie::queue('email_salvata', $request->email, 10080);
+        if(isset($_POST["ricordami"]) && $_POST["ricordami"] == "1"){
+            setcookie("email_salvata", $_POST["email"], time() + (86400 * 7), "/");
         }
         
         return redirect('home');

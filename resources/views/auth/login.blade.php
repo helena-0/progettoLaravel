@@ -24,7 +24,7 @@
         
         <div id="div-email" class="@error('email') errore @enderror">
             <label for="email">E-mail</label>
-            <input type='text' name='email' id="email" value="{{ old('email', $email_salvata ?? '') }}">
+            <input type='text' name='email' id="email" value="{{ old('email', $email_salvata) }}">
             <span>@error('email') {{ $message }} @enderror</span>
         </div>
         

@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Libro extends Model
-{
+class Libro extends Model{
     protected $table = 'libri';
     
     public $timestamps = false;

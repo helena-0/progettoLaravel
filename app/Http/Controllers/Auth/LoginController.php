@@ -6,13 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cookie;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller{
     public function index(){
-        $email_salvata = Cookie::get('email_salvata');
-        return view('auth.login', ['email_salvata' => $email_salvata]);
+        $email_precompilata = "";
+
+        if(isset($_COOKIE["email_salvata"])){
+            $email_precompilata = $_COOKIE["email_salvata"];
+        }
+
+        return view('auth.login', ['email_salvata' => $email_precompilata]);
     }
 
     public function checkLogin(Request $request){
@@ -40,7 +43,7 @@ class LoginController extends Controller
         }
     
         Session(['user_id' => $user->id]);
-        Cookie::queue('email_salvata', $request->email, 10080);
+        setcookie("email_salvata", $_POST["email"], time() + (86400 * 7), "/");
 
         return redirect('home');
     }
