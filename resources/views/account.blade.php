@@ -7,6 +7,7 @@
 @section('page_scripts')
     <script>
         const API_ELIMINA_ACCOUNT_URL = "{{ url('api/elimina_account') }}";
+        const API_UTENTE_URL = "{{ url('api/utente') }}";
     </script>
     <script src="{{ url('js/account.js') }}" defer></script>
 @endsection
@@ -17,11 +18,11 @@
         <div>
             <article>
                 <h4>Email</h4>
-                <p>{{ $user->email }}</p>
+                <p id="account_email"></p>
             </article>
             <article>
                 <h4>Nome e Cognome</h4>
-                <p>{{ $user->nome }} {{ $user->cognome }}</p>
+                <p id="account_dati"></p>
             </article>
         </div>
     </section>

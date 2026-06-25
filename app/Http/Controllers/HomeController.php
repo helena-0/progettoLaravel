@@ -16,8 +16,16 @@ class HomeController extends Controller{
             return redirect('login');
         }
 
+        return view('account');
+    }
+
+    public function datiUtente(){
+        if (!Session::has('user_id')){
+            return response()->json(['error' => 'Non loggato']);
+        }
+        
         $user = User::find(Session::get('user_id'));
-        return view('account', ['user' => $user]);
+        return response()->json($user);
     }
 
     public function carrello(){

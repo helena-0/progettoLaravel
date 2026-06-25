@@ -14,6 +14,7 @@ Route::get('home', [HomeController::class, 'index']);
 Route::get('account', [HomeController::class, 'account']);
 Route::get('carrello', [HomeController::class, 'carrello']);
 Route::get('api/elimina_account', [HomeController::class, 'eliminaAccount']);
+Route::get('api/utente', [HomeController::class, 'datiUtente']);
 
 Route::get('login', [LoginController::class, 'index']);
 Route::post('login', [LoginController::class, 'checkLogin']);

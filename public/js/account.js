@@ -41,6 +41,21 @@ if (btnEliminaAccount) {
 }
 //----------------------------------------------------------------------------------------------------
 
+function onJsonDatiUtente(json){
+    if (!json.error){
+        document.querySelector("#account_email").textContent = json.email;
+        document.querySelector("#account_dati").textContent = json.nome + " " + json.cognome;
+    }
+}
+
+function caricaDatiUtente() {
+    fetch(API_UTENTE_URL).then(function(response) {return response.json();}).then(onJsonDatiUtente);
+}
+
+caricaDatiUtente();
+
+//----------------------------------------------------------------------------------------------------
+
 function modale(){
     const vistaModale=document.querySelector("#modal-view");
     document.body.classList.add("no-scroll");
