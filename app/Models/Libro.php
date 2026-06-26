@@ -8,5 +8,5 @@ class Libro extends Model{
     protected $table = 'libri';
     
     public $timestamps = false;
-    protected $fillable = ['copertina', 'titolo', 'autore', 'prezzo', 'prezzo_sconto'];
+
 }

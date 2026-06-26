@@ -24,10 +24,11 @@ function rimuoviDalCarrello(event) {
     const dati_carrello = new FormData();
     dati_carrello.append("id_libro", idLibro);
 
-    dati_carrello.append("_token", CSRF_TOKEN);
 
-    fetch(API_AGGIUNGI_CARRELLO, { method: "post", body: dati_carrello })
-        .then(onResponse).then(function(json) {
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+    const opzioni = { method: "post", headers: {'X-CSRF-TOKEN': token}, body: dati_carrello };
+
+    fetch(API_AGGIUNGI_CARRELLO, opzioni).then(onResponse).then(function(json) {
         if(json.success) {
             const divContenitoreDescrizione = bottone.parentNode;
             const articolo = divContenitoreDescrizione.parentNode;

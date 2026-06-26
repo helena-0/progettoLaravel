@@ -196,7 +196,16 @@ function onJsonRanking(json) {
     container.innerHTML = "";
 
     const movies = json.results;
-    for (let i = 0; i < 5; i++) {
+
+    if (!movies || movies.length === 0) {
+        container.textContent = "Nessun film in classifica al momento.";
+        return;
+    }
+
+    let maxFilm = movies.length;
+    if (maxFilm > 5) maxFilm = 5;
+
+    for (let i = 0; i < maxFilm; i++) {
         const movieData = movies[i];
         const movieArticle = document.createElement("article");
         movieArticle.classList.add("libro"); 

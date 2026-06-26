@@ -12,4 +12,8 @@ class Carrello extends Model{
     public function libro(){
         return $this->belongsTo(Libro::class, 'libro_id');
     }
+
+    public function user(){
+    return $this->belongsTo(User::class, 'user_id');
+}
 }

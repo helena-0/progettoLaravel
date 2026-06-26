@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model{
     protected $table = 'utenti';
     public $timestamps = false;
-    protected $fillable = [
-        'nome',
-        'cognome',
-        'email',
-        'password',
-    ];
     
     // Un utente ha molti elementi nel carrello
     public function carrelli(){

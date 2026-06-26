@@ -17,8 +17,7 @@
             const API_AGGIUNGI_PREFERITO = "{{ url('api/preferiti/aggiungi') }}";           
             const API_LEGGI_CARRELLO = "{{ url('api/carrello/leggi') }}";
             const API_AGGIUNGI_CARRELLO = "{{ url('api/carrello/aggiungi') }}";
-
-            const CSRF_TOKEN = "{{ csrf_token() }}";
+            
         </script>
         <script src="{{ url('js/app.js') }}" defer></script>
         @yield('scripts')

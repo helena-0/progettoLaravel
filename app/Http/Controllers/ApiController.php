@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http; // Importiamo il modulo Http di Laravel
+use Illuminate\Support\Facades\Http; 
 
 class ApiController extends Controller{
+    
     public function film(Request $request){
+        
         $apiKey = "cb216e086c72157de88a76d71631e973";
 
         if($request->has('q')){
@@ -24,10 +26,15 @@ class ApiController extends Controller{
             ]);
         }
 
-        return $response->json();
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        return response()->json(['results' => []]);
     }
 
     public function openlibrary(Request $request){
+
         if($request->has('isbn')){
             $response = Http::get("https://openlibrary.org/api/books", [
                 'bibkeys' => 'ISBN:' . $request->query('isbn'),
@@ -44,6 +51,10 @@ class ApiController extends Controller{
             return response()->json(['error' => 'Nessun parametro specificato'], 400);
         }
 
-        return $response->json();
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        return response()->json(['num_found' => 0, 'docs' => []]);
     }
 }

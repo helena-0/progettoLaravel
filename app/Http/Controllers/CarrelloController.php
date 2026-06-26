@@ -45,12 +45,20 @@ class CarrelloController extends Controller{
         $userId = Session::get('user_id');
         $libroId = $request->id_libro;
 
-        // Se è un libro cercato da API esterna, lo creiamo nel DB
-        if(!$libroId && $request->has('titolo')){
-            $libro = Libro::firstOrCreate(
-                ['titolo' => $request->titolo, 'autore' => $request->autore],
-                ['copertina' => $request->copertina, 'prezzo' => $request->prezzo,'prezzo_sconto' => $request->prezzo_sconto]
-            );
+        if (!$libroId && $request->has('titolo')) {
+            $libro = Libro::where('titolo', $request->titolo)
+                ->where('autore', $request->autore)
+                ->first();
+
+            if (!$libro) {
+                $libro = new Libro();
+                $libro->titolo = $request->titolo;
+                $libro->autore = $request->autore;
+                $libro->copertina = $request->copertina;
+                $libro->prezzo = $request->prezzo;
+                $libro->prezzo_sconto = $request->prezzo_sconto;
+                $libro->save(); // Slide 81
+            }
             $libroId = $libro->id;
         }
 

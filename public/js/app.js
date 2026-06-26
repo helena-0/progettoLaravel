@@ -47,8 +47,8 @@ function BottoneRosso(event){
         datiDaSpedire.append("prezzo_sconto", bottone.dataset.prezzoSconto || "");
     }
 
-    datiDaSpedire.append("_token", CSRF_TOKEN);
-    const opzioni = { method: "post", body: datiDaSpedire };
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+    const opzioni = { method: "post", headers: {'X-CSRF-TOKEN': token}, body: datiDaSpedire };
 
     fetch(API_AGGIUNGI_PREFERITO, opzioni).then(onResponse).then(function(json) {
         if (!json) return;
@@ -171,8 +171,9 @@ function aggiungiAlCarrello(event){
         dati_carrello.append("prezzo_sconto", bottone.dataset.prezzoSconto);
     }
 
-    dati_carrello.append("_token", CSRF_TOKEN);
-    const opzioni = { method: "post", body: dati_carrello };
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    const opzioni = { method: "post", headers: {'X-CSRF-TOKEN': token}, body: dati_carrello };
     fetch(API_AGGIUNGI_CARRELLO, opzioni).then(onResponse).then(onJsonCarrello);
 }
 
