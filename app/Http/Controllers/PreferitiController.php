@@ -61,7 +61,6 @@ class PreferitiController extends Controller{
             return response()->json(['success' => false, 'error' => 'Dati mancanti']);
         }
 
-        // Recupero l'istanza
         $esiste = Preferito::where('user_id', $userId)->where('libro_id', $libroId)->first();
 
         if($esiste){

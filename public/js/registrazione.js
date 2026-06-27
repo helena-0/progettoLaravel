@@ -67,6 +67,7 @@ function checkConfirmPassword(event) {
     if (formStatus.confirmPassword) {
         document.querySelector("#div-conferma_password").classList.remove("errore");
     } else {
+        ocument.querySelector("#div-conferma_password span").textContent = "Le password non coincidono";
         document.querySelector("#div-conferma_password").classList.add("errore");
     }
 }

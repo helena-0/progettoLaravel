@@ -39,7 +39,8 @@ const btnEliminaAccount = document.querySelector("#bottone_conferma");
 if (btnEliminaAccount) {
     btnEliminaAccount.addEventListener("click", eliminaAccount);
 }
-//----------------------------------------------------------------------------------------------------
+
+
 
 function onJsonDatiUtente(json){
     if (!json.error){
@@ -54,7 +55,8 @@ function caricaDatiUtente() {
 
 caricaDatiUtente();
 
-//----------------------------------------------------------------------------------------------------
+
+
 
 function modale(){
     const vistaModale=document.querySelector("#modal-view");

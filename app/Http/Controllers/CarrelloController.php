@@ -9,7 +9,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 class CarrelloController extends Controller{
-    // Restituisce la lista dei libri nel carrello (Sostituisce api_leggi_carrello.php)
     public function leggi(){
         if(!Session::has('user_id')){
             return response()->json([]);
@@ -20,7 +19,6 @@ class CarrelloController extends Controller{
         
         $risultato = [];
         foreach($carrelloItems as $item){
-            // Uso la relazione "belongsTo" per prendere i dati del libro
             $libro = $item->libro; 
             
             $risultato[] = [
@@ -36,7 +34,6 @@ class CarrelloController extends Controller{
         return response()->json($risultato);
     }
 
-    // Aggiunge o rimuove dal carrello (Sostituisce api_aggiungi_carrello.php)
     public function aggiungiRimuovi(Request $request){
         if(!Session::has('user_id')){
             return response()->json(['success' => false, 'error' => 'Non loggato']);
@@ -57,7 +54,7 @@ class CarrelloController extends Controller{
                 $libro->copertina = $request->copertina;
                 $libro->prezzo = $request->prezzo;
                 $libro->prezzo_sconto = $request->prezzo_sconto;
-                $libro->save(); // Slide 81
+                $libro->save();
             }
             $libroId = $libro->id;
         }

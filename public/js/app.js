@@ -8,7 +8,6 @@ function onResponse(response){
 }
 
 
-//--------------------------------------------------------------------------------------------------------
 
 
 function visualizzaPreferiti(){
@@ -91,7 +90,7 @@ function caricaPreferitiDalDB(){
                 
             const prezzo = document.createElement("div");
             prezzo.classList.add("sottotitoloj");
-            prezzo.textContent = libro.prezzo;
+            prezzo.textContent = String(libro.prezzo)+ " €";
 
             const btnRimuovi = document.createElement("a");
             btnRimuovi.textContent = "Rimuovi";
@@ -122,9 +121,8 @@ function coloraCuoriNellaPagina(preferitiJson){
     for(let i = 0; i < tuttiIBottoni.length; i++){
         const elemento = tuttiIBottoni[i];
         if(!elemento.classList.contains("destra") && !elemento.classList.contains("destra-ricerca")){
-            
-            elemento.classList.remove("bottone-rosso");
-            
+
+            elemento.classList.remove("bottone-rosso");        
             const titoloCuore = elemento.dataset.titolo;
             const copertinaCuore = elemento.dataset.copertina; 
             
@@ -137,7 +135,8 @@ function coloraCuoriNellaPagina(preferitiJson){
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------
+
+
 
 function onJsonCarrello(json){
     if(!json) return;
@@ -179,7 +178,6 @@ function aggiungiAlCarrello(event){
 
 
 
-//-------------------------------------------------------------------------------------------------------------------
 
 
 function onJson(json){
@@ -216,8 +214,8 @@ function onJson(json){
             cover_url = "https://covers.openlibrary.org/b/id/" + doc.cover_i + "-M.jpg";
         }
 
-        const prezzoFittizio = "15,00€";
-        const prezzoScontoFittizio = "16,50€";
+        const prezzoFittizio = 15.00;
+        const prezzoScontoFittizio = 16.50;
         
         const book = document.createElement("div");
         book.classList.add("libro-ricerca");

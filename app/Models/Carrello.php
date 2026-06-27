@@ -8,7 +8,6 @@ class Carrello extends Model{
     protected $table = 'carrello';
     public $timestamps = false;
 
-    // Relazione: questa riga del carrello appartiene a uno specifico libro
     public function libro(){
         return $this->belongsTo(Libro::class, 'libro_id');
     }

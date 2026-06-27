@@ -74,11 +74,11 @@ function creaSchedaLibro(libro) {
 
     const prezzo_libro = document.createElement("div");
     prezzo_libro.classList.add("prezzo");
-    prezzo_libro.textContent = libro.prezzo; 
+    prezzo_libro.textContent = libro.prezzo+" €"; 
 
     const prezzosconto_libro = document.createElement("div");
     prezzosconto_libro.classList.add("sconto");
-    prezzosconto_libro.textContent = libro.prezzo_sconto;
+    prezzosconto_libro.textContent = libro.prezzo_sconto+" €";
 
     const disponibile = document.createElement("div");
     disponibile.classList.add("disponibilita");

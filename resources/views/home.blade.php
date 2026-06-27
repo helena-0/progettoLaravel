@@ -145,7 +145,7 @@
         <h2>Novità da non perdere</h2>       
         
         <div class="sezione" id="sezione-libri-dinamici">
-            </div>  
+        </div>  
         
         <div class="categorie">
             <div><span>Novità con consegna gratis</span></div>

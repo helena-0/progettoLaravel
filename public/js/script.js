@@ -43,7 +43,7 @@ const scorridx_banner=document.querySelector("#banner .destra");
 scorridx_banner.addEventListener("click", OnClickDX);
 
 
-// ------------------------------------------------------------------------------------------
+
 
 
 
@@ -60,10 +60,7 @@ function onJsonCaricaCatalogo(json) {
 
     const utenteLoggato = (document.querySelector("#loggin") === null);
 
-    let maxLibri = json.length;
-    if (maxLibri > 5) maxLibri = 5;
-
-    for (let i = 0; i < maxLibri; i++) {
+    for (let i = 0; i < 5; i++) {
         const libro = json[i];
         const article = document.createElement("article");
         article.classList.add("libro");
@@ -88,7 +85,7 @@ function onJsonCaricaCatalogo(json) {
             btnPreferiti.dataset.idLibro = libro.id; 
             btnPreferiti.dataset.copertina = libro.copertina;
             btnPreferiti.dataset.titolo = libro.titolo;
-            btnPreferiti.dataset.prezzo = libro.prezzo;
+            btnPreferiti.dataset.prezzo = libro.prezzo+" €";
             
             const imgCuore = document.createElement("img");
             imgCuore.src = "immagini/favorite.png";
@@ -144,11 +141,11 @@ function onJsonCaricaCatalogo(json) {
         
         const spanSconto = document.createElement("span");
         spanSconto.classList.add("sconto");
-        spanSconto.textContent = libro.prezzo;
+        spanSconto.textContent = libro.prezzo+" €";
 
         const spanPrezzoPieno = document.createElement("span");
         spanPrezzoPieno.classList.add("prezzo-pieno");
-        spanPrezzoPieno.textContent = libro.prezzo_sconto;
+        spanPrezzoPieno.textContent = libro.prezzo_sconto +" €";
 
         divPrezzo.appendChild(spanSconto);
         divPrezzo.appendChild(spanPrezzoPieno);
@@ -167,7 +164,7 @@ function onJsonCaricaCatalogo(json) {
         caricaPreferitiDalDB();
     }
 }
-// ------------------------------------------------------------------------------------------
+
 
 function ripristinaStatoCarrelloHome() {
     fetch(API_LEGGI_CARRELLO).then(onResponse).then(function(json) {
@@ -186,7 +183,7 @@ inizializzaHome();
 
 
 
-// ----------------------------------------------------------------------------------------------
+
 
 
 
@@ -240,7 +237,6 @@ function onJsonRanking(json) {
 }
 
 function aggiornaClassificaFilm() {
-    
     fetch(API_FILM_URL).then(onResponse).then(onJsonRanking);
 }
 aggiornaClassificaFilm();

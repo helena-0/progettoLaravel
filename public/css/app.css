@@ -12,7 +12,9 @@ a{
     border-left: 1px solid black;
 }
 
-/*header*/
+
+
+
 #bordo-nav{
     background-color: #e30613;
 }
@@ -554,7 +556,9 @@ header{
     height: 45px;
 }
 
-/*la parte del footer bianco*/
+
+
+
 #footer-bianco{
     display: flex;
     flex-direction: column;
