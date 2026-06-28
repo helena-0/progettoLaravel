@@ -65,17 +65,17 @@
 
                 <div class="icone">
                     <img src="{{ url('immagini/favorite.png') }}" class="logo" id="preferiti">
-                    @if(!session()->has('user_id'))
+                    @if(!$auth)
                         <img src="{{ url('immagini/cart.png') }}" class="logo" >
                         <a href="{{ url('login') }}">
-                            <img src="{{ url('immagini/person.png') }}" class="logo" id="loggin">
+                            <img src="{{ url('immagini/person.png') }}" class="logo">
                         </a>
                     @else
                         <a href="{{ url('carrello') }}">
                             <img src="{{ url('immagini/cart.png') }}" class="logo" >
                         </a>
                         <a href="{{ url('account') }}">
-                            <img src="{{ url('immagini/person_log.png') }}" class="logo">
+                            <img src="{{ url('immagini/person_log.png') }}" class="logo" id="loggin">
                         </a>
                     @endif           
                 </div>
@@ -218,8 +218,10 @@
 
             <div id="barra-superiore1024">
                 <div class="icone">
-                    <img src="{{ url('immagini/menu.png') }}" class="logo">
-                    @if(!session()->has('user_id'))
+                    <a href="{{ url('home') }}">
+                        <img src="{{ url('immagini/logo.png') }}" class="logo">
+                    </a>
+                    @if(!$auth)
                         <a href="{{ url('login') }}">
                             <img src="{{ url('immagini/person.png') }}" class="logo">
                         </a>
@@ -232,7 +234,7 @@
                 <img src="{{ url('immagini/logo.png') }}" class="logo">
                 <div class="icone">
                     <img src="{{ url('immagini/favorite.png') }}" class="logo">
-                    @if(!session()->has('user_id'))
+                    @if(!$auth)
                         <img src="{{ url('immagini/cart.png') }}" class="logo">
                     @else
                         <a href="{{ url('carrello') }}">
@@ -508,12 +510,12 @@
                             <span class="icone">
                                 <img src="{{ url('immagini/Visa.png') }}">
                                 <img src="{{ url('immagini/Visa-electron.png') }}">
-                                <img src="{{ url('immagini/Mastercard.png') }}">
-                                <img src="{{ url('immagini/AmericnExpress.png') }}">
+                                <img src="{{ url('immagini/MasterCard.png') }}">
+                                <img src="{{ url('immagini/AmericanExpress.png') }}">
                                 <img src="{{ url('immagini/PayPal.png') }}">
                                 <img src="{{ url('immagini/Postepay.png') }}">
                                 <img src="{{ url('immagini/VerifiedVisa.png') }}">
-                                <img src="{{ url('immagini/VerySigh.png') }}">
+                                <img src="{{ url('immagini/VeriSign.png') }}">
                                 <img src="{{ url('immagini/Klarna.png') }}">
                             </span>
                         </div>
@@ -523,7 +525,7 @@
                             <span>Garanzia:</span>
                             <div>
                                 <img src="{{ url('immagini/Netcomm.png') }}">
-                                <img src="{{ url('immagini/feddaty.png') }}">
+                                <img src="{{ url('immagini/feedaty.png') }}">
                             </div>
                         </div>
                         <div>

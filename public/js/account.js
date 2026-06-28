@@ -1,3 +1,33 @@
+function caricaDatiUtente() {
+    fetch(API_UTENTE_URL).then(function(response) {return response.json();}).then(onJsonDatiUtente);
+}
+
+function onJsonDatiUtente(json){
+    if (!json.error){
+        document.querySelector("#account_email").textContent = json.email;
+        document.querySelector("#account_dati").textContent = json.nome + " " + json.cognome;
+    }
+}
+
+
+
+function modale(){
+    const vistaModale=document.querySelector("#modal-view");
+    document.body.classList.add("no-scroll");
+    vistaModale.classList.remove("hidden");
+}
+
+
+
+
+function onResponseEliminaAccount(response) {
+    return response.json();
+}
+
+function eliminaAccount(event) {
+    fetch(API_ELIMINA_ACCOUNT_URL).then(onResponseEliminaAccount).then(onJsonEliminaAccount);
+}
+
 function onJsonEliminaAccount(json) {
     if (json.success === true) {
         const boxElimina = document.querySelector("#boxElimina");
@@ -27,47 +57,8 @@ function onJsonEliminaAccount(json) {
     }
 }
 
-function onResponseEliminaAccount(response) {
-    return response.json();
-}
-
-function eliminaAccount(event) {
-    fetch(API_ELIMINA_ACCOUNT_URL).then(onResponseEliminaAccount).then(onJsonEliminaAccount);
-}
-
-const btnEliminaAccount = document.querySelector("#bottone_conferma");
-if (btnEliminaAccount) {
-    btnEliminaAccount.addEventListener("click", eliminaAccount);
-}
 
 
-
-function onJsonDatiUtente(json){
-    if (!json.error){
-        document.querySelector("#account_email").textContent = json.email;
-        document.querySelector("#account_dati").textContent = json.nome + " " + json.cognome;
-    }
-}
-
-function caricaDatiUtente() {
-    fetch(API_UTENTE_URL).then(function(response) {return response.json();}).then(onJsonDatiUtente);
-}
-
-caricaDatiUtente();
-
-
-
-
-function modale(){
-    const vistaModale=document.querySelector("#modal-view");
-    document.body.classList.add("no-scroll");
-    vistaModale.classList.remove("hidden");
-}
-
-const accesso=document.querySelector("#bottone_elimina");
-if(accesso){
-    accesso.addEventListener("click", modale);
-}
 
 function chiudereModale(event){
 
@@ -76,6 +67,21 @@ function chiudereModale(event){
     document.body.classList.remove("no-scroll");
     const vistaModale=document.querySelector("#modal-view");
     vistaModale.classList.add("hidden");
+}
+
+
+
+
+caricaDatiUtente();
+
+const accesso=document.querySelector("#bottone_elimina");
+if(accesso){
+    accesso.addEventListener("click", modale);
+}
+
+const btnEliminaAccount = document.querySelector("#bottone_conferma");
+if (btnEliminaAccount) {
+    btnEliminaAccount.addEventListener("click", eliminaAccount);
 }
 
 const annulla=document.querySelector("#boxElimina a");

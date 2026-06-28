@@ -1,3 +1,12 @@
+function caricaCarrelloAsincrono() {
+    const contenitore = document.querySelector("#carrello");
+ 
+    if (contenitore) {
+        fetch(API_LEGGI_CARRELLO).then(onResponse).then(onJsonLeggiCarrello);
+    }
+}
+
+
 function onJsonLeggiCarrello(json) {
     const carrello = document.querySelector("#carrello");
 
@@ -7,8 +16,7 @@ function onJsonLeggiCarrello(json) {
     carrello.appendChild(titoloCarrello);
 
     if (json.length === 0) {
-        aggiornaStatoCarrello();
-        return;
+       mostraMessaggioVuoto()
     }
 
     for (let i = 0; i < json.length; i++) {
@@ -17,29 +25,13 @@ function onJsonLeggiCarrello(json) {
     }
 }
 
-function rimuoviDalCarrello(event) {
-    const bottone = event.currentTarget;
-    const idLibro = bottone.dataset.idLibro; 
-    
-    const dati_carrello = new FormData();
-    dati_carrello.append("id_libro", idLibro);
-
-
-    const token = document.querySelector('meta[name="csrf-token"]').content;
-    const opzioni = { method: "post", headers: {'X-CSRF-TOKEN': token}, body: dati_carrello };
-
-    fetch(API_AGGIUNGI_CARRELLO, opzioni).then(onResponse).then(function(json) {
-        if(json.success) {
-            const divContenitoreDescrizione = bottone.parentNode;
-            const articolo = divContenitoreDescrizione.parentNode;
-                
-            setTimeout(function() {
-                articolo.remove();
-                aggiornaStatoCarrello();
-            }, 500);
-        }
-    });
+function mostraMessaggioVuoto() {
+    const carrello = document.querySelector("#carrello");
+    const testoVuoto = document.createElement("div");
+    testoVuoto.textContent = "Il tuo carrello è vuoto. Aggiungi qualche libro!";
+    carrello.appendChild(testoVuoto);
 }
+
 
 
 function creaSchedaLibro(libro) {
@@ -109,30 +101,41 @@ function creaSchedaLibro(libro) {
 }
 
 
-function caricaCarrelloAsincrono() {
-    const contenitore = document.querySelector("#carrello");
- 
-    if (contenitore) {
-        fetch(API_LEGGI_CARRELLO).then(onResponse).then(onJsonLeggiCarrello);
-    }
+function rimuoviDalCarrello(event) {
+    const bottone = event.currentTarget;
+    const idLibro = bottone.dataset.idLibro; 
+    
+    const dati_carrello = new FormData();
+    dati_carrello.append("id_libro", idLibro);
+
+
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+    const opzioni = { method: "post", headers: {'X-CSRF-TOKEN': token}, body: dati_carrello };
+
+    fetch(API_AGGIUNGI_CARRELLO, opzioni).then(onResponse).then(function(json) {
+        if(json.success) {
+            const divContenitoreDescrizione = bottone.parentNode;
+            const articolo = divContenitoreDescrizione.parentNode;
+                
+            setTimeout(function() {
+                articolo.remove();
+                aggiornaStatoCarrello();
+            }, 500);
+        }
+    });
 }
 
-caricaCarrelloAsincrono();
 
 function aggiornaStatoCarrello() {
     const carrello = document.querySelector("#carrello");
     const numeroLibri = carrello.querySelectorAll(".articolo_libro").length;
 
     if (numeroLibri === 0) {
-        carrello.innerHTML = ""; 
-
-        const titoloCarrello = document.createElement("h2");
-        titoloCarrello.textContent = "Il mio carrello";
-        
-        const testoVuoto = document.createElement("div");
-        testoVuoto.textContent = "Il tuo carrello è vuoto. Aggiungi qualche libro!";
-
-        carrello.appendChild(titoloCarrello);
-        carrello.appendChild(testoVuoto);
+        mostraMessaggioVuoto()
     }
 }
+
+
+
+
+caricaCarrelloAsincrono();

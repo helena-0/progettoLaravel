@@ -30,31 +30,24 @@ class ApiController extends Controller{
             return $response->json();
         }
 
-        return response()->json(['results' => []]);
+        return response()->json([]);
     }
 
     public function openlibrary(Request $request){
 
-        if($request->has('isbn')){
-            $response = Http::get("https://openlibrary.org/api/books", [
-                'bibkeys' => 'ISBN:' . $request->query('isbn'),
-                'format' => 'json',
-                'jscmd' => 'data'
-            ]);
-        } 
-        elseif($request->has('q')){
+        if($request->has('q')){
             $response = Http::get("https://openlibrary.org/search.json", [
                 'q' => $request->query('q')
             ]);
         } 
         else{
-            return response()->json(['error' => 'Nessun parametro specificato'], 400);
+            return response()->json([], 400);
         }
 
         if ($response->successful()) {
             return $response->json();
         }
 
-        return response()->json(['num_found' => 0, 'docs' => []]);
+        return response()->json([]);
     }
 }

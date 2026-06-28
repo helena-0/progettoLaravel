@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Libro;
+use App\Models\User;
 use App\Models\Preferito;
 use Illuminate\Support\Facades\Session;
 
@@ -14,7 +15,8 @@ class PreferitiController extends Controller{
         }
 
         $userId = Session::get('user_id');
-        $preferitiItems = Preferito::where('user_id', $userId)->get();
+        $user = User::find($userId);
+        $preferitiItems = $user->preferiti()->get();
         
         $risultato = [];
         foreach($preferitiItems as $item){
@@ -34,7 +36,7 @@ class PreferitiController extends Controller{
 
     public function aggiungiRimuovi(Request $request){
         if(!Session::has('user_id')){
-            return response()->json(['success' => false, 'error' => 'Non loggato']);
+            return response()->json(['success' => false]);
         }
 
         $userId = Session::get('user_id');
@@ -58,21 +60,23 @@ class PreferitiController extends Controller{
         }
 
         if(!$libroId){
-            return response()->json(['success' => false, 'error' => 'Dati mancanti']);
+            return response()->json(['success' => false]);
         }
 
-        $esiste = Preferito::where('user_id', $userId)->where('libro_id', $libroId)->first();
+        $user = User::find($userId);
+        $esiste = $user->preferiti()->where('libro_id', $libroId)->first();
 
         if($esiste){
             $esiste->delete();
-            return response()->json(['success' => true, 'messaggio' => 'Rimosso dai preferiti']);
-        } else {
+            return response()->json(['success' => true]);
+        } 
+        else {
             $nuovo = new Preferito();
             $nuovo->user_id = $userId;
             $nuovo->libro_id = $libroId;
             $nuovo->save();
             
-            return response()->json(['success' => true, 'messaggio' => 'Aggiunto ai preferiti']);
+            return response()->json(['success' => true]);
         }
     }
 }

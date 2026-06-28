@@ -48,8 +48,4 @@ class LoginController extends Controller{
         return redirect('home');
     }
 
-    public function logout(){
-        Session::flush();
-        return redirect('home');
-    }
 }

@@ -9,13 +9,22 @@ use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 class CarrelloController extends Controller{
+    public function carrello(){
+        if (!Session::has('user_id')){
+            return redirect('login');
+        }
+
+        return view('carrello', ['auth' => true]);
+    }
+
     public function leggi(){
         if(!Session::has('user_id')){
             return response()->json([]);
         }
 
         $userId = Session::get('user_id');
-        $carrelloItems = Carrello::where('user_id', $userId)->get();
+        $user = User::find($userId);
+        $carrelloItems = $user->carrelli()->get();
         
         $risultato = [];
         foreach($carrelloItems as $item){
@@ -36,7 +45,7 @@ class CarrelloController extends Controller{
 
     public function aggiungiRimuovi(Request $request){
         if(!Session::has('user_id')){
-            return response()->json(['success' => false, 'error' => 'Non loggato']);
+            return response()->json(['success' => false]);
         }
 
         $userId = Session::get('user_id');
@@ -59,13 +68,16 @@ class CarrelloController extends Controller{
             $libroId = $libro->id;
         }
 
-        $esiste = Carrello::where('user_id', $userId)
-            ->where('libro_id', $libroId)
-            ->first();
+        if(!$libroId){
+            return response()->json(['success' => false]);
+        }
 
-       if($esiste){
+        $user = User::find($userId);
+        $esiste = $user->carrelli()->where('libro_id', $libroId)->first();
+        
+        if($esiste){
             $esiste->delete();
-            return response()->json(['success' => true, 'messaggio' => 'Rimosso dal carrello']);
+            return response()->json(['success' => true]);
         }
         else{
             $nuovo = new Carrello();
@@ -73,7 +85,7 @@ class CarrelloController extends Controller{
             $nuovo->libro_id = $libroId;
             $nuovo->save();
             
-            return response()->json(['success' => true, 'messaggio' => 'Aggiunto al carrello']);
+            return response()->json(['success' => true]);
         }
     }
 }

@@ -45,8 +45,6 @@ scorridx_banner.addEventListener("click", OnClickDX);
 
 
 
-
-
 function inizializzaHome() {
     const contenitoreHome = document.querySelector("#sezione-libri-dinamici");
     if (contenitoreHome) {
@@ -58,7 +56,7 @@ function onJsonCaricaCatalogo(json) {
     const contenitoreHome = document.querySelector("#sezione-libri-dinamici");
     contenitoreHome.innerHTML = ""; 
 
-    const utenteLoggato = (document.querySelector("#loggin") === null);
+    const utenteLoggato = document.querySelector("#loggin");
 
     for (let i = 0; i < 5; i++) {
         const libro = json[i];
@@ -179,14 +177,14 @@ function ripristinaStatoCarrelloHome() {
 }
 
 
-inizializzaHome();
 
 
 
 
 
-
-
+function aggiornaClassificaFilm() {
+    fetch(API_FILM_URL).then(onResponse).then(onJsonRanking);
+}
 
 function onJsonRanking(json) {
     const container = document.querySelector("#lista-ranking-film");
@@ -236,11 +234,24 @@ function onJsonRanking(json) {
     }
 }
 
-function aggiornaClassificaFilm() {
-    fetch(API_FILM_URL).then(onResponse).then(onJsonRanking);
-}
-aggiornaClassificaFilm();
 
+
+
+
+function cercaFilmTramiteForm(event) {
+    event.preventDefault();
+    const inputRicerca = document.querySelector("#layout-film .input-ricerca");
+    const testoCercato = encodeURIComponent(inputRicerca.value);
+
+    if (!testoCercato){
+        const contenitoreRisultato = document.querySelector("#risultato-ricerca");
+        contenitoreRisultato.innerHTML = "";
+        return;
+    }
+
+    const url = API_FILM_URL+ "?q=" + testoCercato;
+    fetch(url).then(onResponse).then(onJsonRicerca);
+}
 
 function onJsonRicerca(json) {
     console.log("Risultati ricerca:", json);
@@ -275,20 +286,10 @@ function onJsonRicerca(json) {
     contenitoreRisultato.appendChild(schedaFilm);
 }
 
-function cercaFilmTramiteForm(event) {
-    event.preventDefault();
-    const inputRicerca = document.querySelector("#layout-film .input-ricerca");
-    const testoCercato = encodeURIComponent(inputRicerca.value);
 
-    if (!testoCercato){
-        const contenitoreRisultato = document.querySelector("#risultato-ricerca");
-        contenitoreRisultato.innerHTML = "";
-        return;
-    }
 
-    const url = API_FILM_URL+ "?q=" + testoCercato;
-    fetch(url).then(onResponse).then(onJsonRicerca);
-}
+inizializzaHome();
+aggiornaClassificaFilm();
 
 const formRicerca = document.querySelector("#form-ricerca-film");
 formRicerca.addEventListener("submit", cercaFilmTramiteForm);
