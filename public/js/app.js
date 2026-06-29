@@ -147,19 +147,7 @@ function onJson(json){
     }
 
     if(utenteLoggato){
-        fetch(API_LEGGI_CARRELLO).then(onResponse).then(function(carrelloJson) {
-                const bottoniRicerca = document.querySelectorAll("#sezione-ricerca .destra-ricerca");
-                for(let b = 0; b < bottoniRicerca.length; b++){
-                    const btn = bottoniRicerca[b];
-                    const titoloBtn = btn.dataset.titolo;
-                    for(let c = 0; c < carrelloJson.length; c++){
-                        if(carrelloJson[c].titolo === titoloBtn){
-                            btn.classList.add("bottone-rosso");
-                        }
-                    }
-                }
-            });
-
+        fetch(API_LEGGI_CARRELLO).then(onResponse).then(coloraCarrelliNellaPagina);
         caricaPreferitiDalDB();
     }
 }
@@ -273,6 +261,9 @@ function coloraCuoriNellaPagina(preferitiJson){
 }
 
 
+
+
+
 function onJsonCarrello(json){
     if(!json) return;
     if(json.success === true){
@@ -309,6 +300,23 @@ function aggiungiAlCarrello(event){
 
     const opzioni = { method: "post", headers: {'X-CSRF-TOKEN': token}, body: dati_carrello };
     fetch(API_AGGIUNGI_CARRELLO, opzioni).then(onResponse).then(onJsonCarrello);
+}
+
+function coloraCarrelliNellaPagina(carrelloJson) {
+    const tuttiICarrelli = document.querySelectorAll(".pulsante-freccia.destra, .pulsante-freccia.destra-ricerca");
+    
+    for (let i = 0; i < tuttiICarrelli.length; i++) {
+        const btn = tuttiICarrelli[i];
+        btn.classList.remove("bottone-rosso"); 
+        const idBtn = btn.dataset.idLibro;
+        const titoloBtn = btn.dataset.titolo;
+
+        for (let c = 0; c < carrelloJson.length; c++) {
+            if ( (idBtn && carrelloJson[c].libro_id == idBtn) || (titoloBtn && carrelloJson[c].titolo === titoloBtn) ) {
+                btn.classList.add("bottone-rosso");
+            }
+        }
+    }
 }
 
 const pulsantePreferiti=document.querySelector("#preferiti");

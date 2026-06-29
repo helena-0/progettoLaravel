@@ -35,6 +35,9 @@ class AccountController extends Controller{
         if ($user){
             $user->delete(); 
             Session::flush(); 
+            if (isset($_COOKIE['user_id'])) {
+                setcookie("user_id", "", time() - 3600, "/");
+            }
             return response()->json(['success' => true]);
         }
 

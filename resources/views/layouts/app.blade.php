@@ -218,9 +218,6 @@
 
             <div id="barra-superiore1024">
                 <div class="icone">
-                    <a href="{{ url('home') }}">
-                        <img src="{{ url('immagini/logo.png') }}" class="logo">
-                    </a>
                     @if(!$auth)
                         <a href="{{ url('login') }}">
                             <img src="{{ url('immagini/person.png') }}" class="logo">

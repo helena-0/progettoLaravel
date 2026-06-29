@@ -45,6 +45,8 @@ scorridx_banner.addEventListener("click", OnClickDX);
 
 
 
+
+
 function inizializzaHome() {
     const contenitoreHome = document.querySelector("#sezione-libri-dinamici");
     if (contenitoreHome) {
@@ -158,24 +160,10 @@ function onJsonCaricaCatalogo(json) {
     }
 
     if (utenteLoggato) {
-        ripristinaStatoCarrelloHome();
+        fetch(API_LEGGI_CARRELLO).then(onResponse).then(coloraCarrelliNellaPagina);
         caricaPreferitiDalDB();
     }
 }
-
-
-function ripristinaStatoCarrelloHome() {
-    fetch(API_LEGGI_CARRELLO).then(onResponse).then(function(json) {
-        for (let i = 0; i < json.length; i++) {
-            const idLibroSalvato = json[i].libro_id;
-            const bottone = document.querySelector(".pulsante-freccia.destra[data-id-libro='" + idLibroSalvato + "']");
-            if (bottone) {
-                bottone.classList.add("bottone-rosso");
-            }
-        }
-        });
-}
-
 
 
 

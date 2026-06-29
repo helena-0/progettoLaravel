@@ -63,11 +63,11 @@ function checkPassword(event) {
 
 function checkConfirmPassword(event) {
     const confirmPasswordInput = document.querySelector("#conferma_password");
-    formStatus.confirmPassword = confirmPasswordInput.value === document.querySelector("#password").value;
+    formStatus.confirmPassword = (confirmPasswordInput.value === document.querySelector("#password").value);
     if (formStatus.confirmPassword) {
         document.querySelector("#div-conferma_password").classList.remove("errore");
     } else {
-        ocument.querySelector("#div-conferma_password span").textContent = "Le password non coincidono";
+        document.querySelector("#div-conferma_password span").textContent = "Le password non coincidono";
         document.querySelector("#div-conferma_password").classList.add("errore");
     }
 }
