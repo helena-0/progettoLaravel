@@ -30,7 +30,7 @@ class ApiController extends Controller{
             return $response->json();
         }
 
-        return response()->json([]);
+        return [];
     }
 
     public function openlibrary(Request $request){
@@ -48,6 +48,6 @@ class ApiController extends Controller{
             return $response->json();
         }
 
-        return response()->json([]);
+        return [];
     }
 }

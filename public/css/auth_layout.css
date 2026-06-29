@@ -7,7 +7,7 @@ body{
 #body_sx{
     width: 50%;
     height: 100vh;
-    background-image: url('../immagini/registration-visual.jpg');
+    background-image: var(--bg-visual);
     background-size: cover;
     background-position: center;
 }

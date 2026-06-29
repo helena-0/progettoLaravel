@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class PreferitiController extends Controller{
     public function leggi(){
         if(!Session::has('user_id')){
-            return response()->json([]);
+            return [];
         }
 
         $userId = Session::get('user_id');
@@ -31,12 +31,12 @@ class PreferitiController extends Controller{
                 'prezzo_sconto' => $libro->prezzo_sconto
             ];
         }
-        return response()->json($risultato);
+        return $risultato;
     }
 
     public function aggiungiRimuovi(Request $request){
         if(!Session::has('user_id')){
-            return response()->json(['success' => false]);
+            return ['success' => false];
         }
 
         $userId = Session::get('user_id');
@@ -60,7 +60,7 @@ class PreferitiController extends Controller{
         }
 
         if(!$libroId){
-            return response()->json(['success' => false]);
+            return ['success' => false];
         }
 
         $user = User::find($userId);
@@ -68,7 +68,7 @@ class PreferitiController extends Controller{
 
         if($esiste){
             $esiste->delete();
-            return response()->json(['success' => true]);
+            return ['success' => true];
         } 
         else {
             $nuovo = new Preferito();
@@ -76,7 +76,7 @@ class PreferitiController extends Controller{
             $nuovo->libro_id = $libroId;
             $nuovo->save();
             
-            return response()->json(['success' => true]);
+            return ['success' => true];
         }
     }
 }

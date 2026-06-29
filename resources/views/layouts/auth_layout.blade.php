@@ -4,6 +4,11 @@
     <title>@yield('title', 'Autenticazione - Feltrinelli')</title> 
     
     <link rel="stylesheet" href="{{ url('css/auth_layout.css') }}" />
+    <style>
+            :root {
+                --bg-visual: url('{{ url('immagini/registration-visual.jpg') }}');
+            }
+        </style>
     @yield('styles')
 
     @yield('scripts')

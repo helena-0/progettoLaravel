@@ -19,7 +19,7 @@ class CarrelloController extends Controller{
 
     public function leggi(){
         if(!Session::has('user_id')){
-            return response()->json([]);
+            return [];
         }
 
         $userId = Session::get('user_id');
@@ -40,12 +40,12 @@ class CarrelloController extends Controller{
             ];
         }
 
-        return response()->json($risultato);
+        return $risultato;
     }
 
     public function aggiungiRimuovi(Request $request){
         if(!Session::has('user_id')){
-            return response()->json(['success' => false]);
+            return ['success' => false];
         }
 
         $userId = Session::get('user_id');
@@ -69,7 +69,7 @@ class CarrelloController extends Controller{
         }
 
         if(!$libroId){
-            return response()->json(['success' => false]);
+            return ['success' => false];
         }
 
         $user = User::find($userId);
@@ -77,7 +77,7 @@ class CarrelloController extends Controller{
         
         if($esiste){
             $esiste->delete();
-            return response()->json(['success' => true]);
+            return ['success' => true];
         }
         else{
             $nuovo = new Carrello();
@@ -85,7 +85,7 @@ class CarrelloController extends Controller{
             $nuovo->libro_id = $libroId;
             $nuovo->save();
             
-            return response()->json(['success' => true]);
+            return ['success' => true];
         }
     }
 }

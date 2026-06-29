@@ -66,12 +66,12 @@ class RegisterController extends Controller{
 
     public function checkEmail(Request $request){
         if(!$request->has('q')){
-            return response()->json(['exists' => false]);
+            return ['exists' => false];
         }
 
         $email = $request->query('q');
         $exists = User::where('email', $email)->exists();
 
-        return response()->json(array("exists" => $exists));
+        return ["exists" => $exists];
     }
 }

@@ -412,7 +412,7 @@ header{
 }
 
 #contenitore-promo, #contenitore-promo2{
-    background-image: url('../immagini/promo-libro.jpg');
+    background-image: var(--bg-promo);
     background-size: cover;
     height: 100%;
     width: 130%;
@@ -421,7 +421,7 @@ header{
 }
 
 #contenitore-promo2{
-    background-image: url('../immagini/promo-libro2.jpg');
+    background-image: var(--bg-promo2);
 }
 
 .overlay-menu{

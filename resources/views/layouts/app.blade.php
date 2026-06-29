@@ -3,6 +3,12 @@
     <head>
         <title>Feltrinelli: Libri, DVD, Blue-Ray, CD, eBook, Games, eReader, Giocattoli</title>
         <link rel="stylesheet" href="{{ url('css/app.css') }}" />
+        <style>
+            :root {
+                --bg-promo: url('{{ url('immagini/promo-libro.jpg') }}');
+                --bg-promo2: url('{{ url('immagini/promo-libro2.jpg') }}');
+            }
+        </style>
         @yield('styles')
 
         <meta name="viewport" content="width=device-width, initial-scale=1">

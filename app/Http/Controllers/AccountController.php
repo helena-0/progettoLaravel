@@ -22,12 +22,12 @@ class AccountController extends Controller{
         }
         
         $user = User::find(Session::get('user_id'));
-        return response()->json($user);
+        return $user;
     }
 
     public function eliminaAccount(){
         if (!Session::has('user_id')){
-            return response()->json(['success' => false]);
+            return ['success' => false];
         }
 
         $user = User::find(Session::get('user_id'));
@@ -38,10 +38,10 @@ class AccountController extends Controller{
             if (isset($_COOKIE['user_id'])) {
                 setcookie("user_id", "", time() - 3600, "/");
             }
-            return response()->json(['success' => true]);
+            return ['success' => true];
         }
 
-        return response()->json(['success' => false]);
+        return ['success' => false];
     }
 
     public function logout(){
